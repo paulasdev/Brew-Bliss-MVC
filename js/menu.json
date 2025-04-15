@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Cappuccino",
+    "price": "€4.00",
+    "description": "A rich and foamy coffee topped with steamed milk.",
+    "image": "img/fem-capuccino.jpg"
+  },
+  {
+    "name": "Macchiato",
+    "price": "€3.50",
+    "description": "Espresso with a touch of frothy milk.",
+    "image": "img/fem-coffee-mac.jpg"
+  },
+  {
+    "name": "Latte",
+    "price": "€3.50",
+    "description": "Smooth blend of espresso and steamed milk.",
+    "image": "img/fem-latte.jpg"
+  }
+]
