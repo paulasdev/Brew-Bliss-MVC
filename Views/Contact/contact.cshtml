@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+}
+
+      <section class="contact-section">
+        <div class="contact-intro">
+          <h1><span class="fancy-text">Get in Touch</span> with Brew Bliss</h1>
+          <p>
+            We'd love to hear from you! Whether it's feedback, inquiries, or
+            just saying hi—drop us a message and we'll get back to you as soon
+            as possible.
+          </p>
+        </div>
+
+        <div class="contact-container">
+          <div class="contact-form">
+            <form action="#" method="post">
+              <label for="fullName">Name:</label>
+              <input type="text" id="fullName" name="fullName" required />
+
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required />
+
+              <label for="message">Message:</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+              ></textarea>
+
+              <button class="btn-order" type="submit">Send Message</button>
+            </form>
+          </div>
+
+          <div class="contact-info">
+            <h3>Visit Us</h3>
+            <p>📍 Brew Bliss Café<br />123 Bean Lane, Brewtown</p>
+            <p>📞 123-456-7890</p>
+            <p>📧 hello@brewbliss.com</p>
+          </div>
+        </div>
+      </section>
+
+      <aside>
+        <h3>Fun Fact</h3>
+        <p>
+          Did you know coffee is the second most traded commodity in the world
+          after oil?
+        </p>
+      </aside>

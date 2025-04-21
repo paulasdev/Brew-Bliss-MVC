@@ -1,0 +1,148 @@
+@{
+    ViewData["Title"] = "Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+}
+        <section class="menu">
+          <h1>
+            We deliver nothing but <br />
+            the finest coffee experience
+          </h1>
+          <p class="promo">
+            <span class="icon">⚙</span> 50% off on several items
+          </p>
+
+          <div class="search-box">
+            <input type="text" placeholder="Search here" />
+            <button>Search</button>
+          </div>
+
+          <div class="categories">
+            <div>
+              <img src="img/coffee.png" />
+              <p>Hot Coffee</p>
+            </div>
+            <div>
+              <img src="img/coffee-to-go.png" />
+              <p>Cup Coffee</p>
+            </div>
+            <div>
+              <img src="img/icons8-frappe-64.png" />
+              <p>Cold Coffee</p>
+            </div>
+            <div>
+              <img src="img/tea.png" />
+              <p>Tea</p>
+            </div>
+            <div>
+              <img src="img/cake.png" />
+              <p>Dessert</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="products">
+          <div class="card">
+            <div class="badge">⚙ 50% off – €2.50</div>
+            <img src="img/fem-coffee.jpg" alt="Black coffee in a white mug" />
+            <h3>Coffee Bliss<span>€5.00</span></h3>
+            <p>
+              The beans are hand-picked, carefully sorted, and only the finest
+              make it into our everyday single-source brew.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="badge">⚙ 50% off – €2.50</div>
+            <img
+              src="img/fem-iced-coffee.jpg"
+              alt="Cold brewed iced coffee with half-and-half."
+            />
+            <h3>Iced Coffee<span>€5.00</span></h3>
+            <p>
+              Our iced coffee is cold-brewed overnight, then mixed to order with
+              half-and-half, sugar, and plenty of ice.
+            </p>
+          </div>
+
+          <div class="card">
+            <img
+              src="img/fem-latte.jpg"
+              alt="Latte with foamy milk and flavors."
+            />
+            <h3>Latte Charm <span>€3.50</span></h3>
+            <p>
+              Combining our amazing espresso with plenty of hot, foamy milk, our
+              lattes are the talk of the town. We offer a dozen different syrup
+              flavors, including vanilla, cinnamon, and caramel.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="badge">⚙ 50% off – €2.00</div>
+            <img
+              src="img/fem-capuccino.jpg"
+              alt="Cappuccino with balanced milk and espresso."
+            />
+            <h3>Cappuccino<span>€4.00</span></h3>
+            <p>
+              Want an even balance of milk and espresso? Our cappuccino is for
+              you. Ask for a sprinkle of cocoa powder, vanilla powder, or
+              cinnamon on top.
+            </p>
+          </div>
+
+          <div class="card">
+            <img
+              src="img/fem-coffee-mac.jpg"
+              alt="Macchiato with espresso and milk foam"
+            />
+            <h3>Macchiato Marvel<span>€3.50</span></h3>
+            <p>
+              A macchiato has only espresso and milk foam - even less milk than
+              the cappuccino or latte.
+            </p>
+          </div>
+        </section>
+
+        <section class="menu-table container my-5">
+          <h2 class="text-center mb-4">Our Coffee Prices</h2>
+          <div class="table-responsive">
+            <table class="table brew-table">
+              <caption class="text-center">
+                Our Classic Brews
+              </caption>
+              <thead>
+                <tr>
+                  <th>Beverage</th>
+                  <th>Size</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Espresso</td>
+                  <td>Small</td>
+                  <td>€2.50</td>
+                </tr>
+                <tr>
+                  <td>Latte</td>
+                  <td>Medium</td>
+                  <td>€3.20</td>
+                </tr>
+                <tr>
+                  <td>Cappuccino</td>
+                  <td>Large</td>
+                  <td>€3.80</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
