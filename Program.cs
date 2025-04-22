@@ -24,4 +24,18 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Contact}/{action=Contact}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=About}/{action=About}/{id?}");    
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Menu}/{action=Menu}/{id?}");
+
+
+
 app.Run();

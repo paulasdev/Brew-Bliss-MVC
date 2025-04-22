@@ -1,5 +1,5 @@
 // Load and display reviews
-fetch("js/reviews.json")
+fetch("/js/reviews.json")
   .then((response) => response.json())
   .then((data) => {
     const container = document.getElementById("reviews-container");
@@ -20,7 +20,7 @@ fetch("js/reviews.json")
   });
 
 // Load and display menu
-fetch("js/menu.json")
+fetch("/js/menu.json")
   .then((response) => response.json())
   .then((data) => {
     const menuContainer = document.getElementById("menu-container");
