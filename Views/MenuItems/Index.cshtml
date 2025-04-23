@@ -1,0 +1,40 @@
+@model List<BrewBlissApp.Models.MenuItemModel>
+@{
+    ViewData["Title"] = "Menu Items";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+}
+
+<div class="container my-5">
+    <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #6f4e37;">Our Menu</h2>
+
+    <div class="text-end mb-4">
+        <a class="btn btn-outline-dark btn-lg px-4 rounded-pill" asp-action="Create" asp-controller="MenuItems">+ Add New Item</a>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow rounded-4 border-0">
+                    <img src="~/@item.Image" class="card-img-top rounded-top-4" alt="@item.Name" style="height: 250px; object-fit: cover;" />
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title text-center fw-bold" style="color: #6f4e37;">@item.Name</h5>
+                        <p class="card-text text-muted">@item.Description</p>
+                        <p class="card-text text-end fw-semibold fs-5">€@item.Price.ToString("0.00")</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between bg-white border-0 px-3 pb-3">
+                        <a asp-action="Edit" asp-controller="MenuItems" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm px-4 rounded-pill">Edit</a>
+                        <a asp-action="Delete" asp-controller="MenuItems" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm px-4 rounded-pill">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

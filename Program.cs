@@ -25,17 +25,19 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
-    name: "default",
+    name: "default1",
     pattern: "{controller=Contact}/{action=Contact}/{id?}");
 
 app.MapControllerRoute(
-    name: "default",
+    name: "default2",
     pattern: "{controller=About}/{action=About}/{id?}");    
 
 app.MapControllerRoute(
-    name: "default",
+    name: "default3",
     pattern: "{controller=Menu}/{action=Menu}/{id?}");
 
+// API routes (for MenuController, ReviewsController)
+app.MapControllers(); 
 
 
 app.Run();
