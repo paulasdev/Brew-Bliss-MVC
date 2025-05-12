@@ -1,59 +1,57 @@
 @model BrewBlissApp.Models.MenuItem
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>MenuItem</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="MenuItemId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImagePath" class="control-label"></label>
-                <input asp-for="ImagePath" class="form-control" />
-                <span asp-validation-for="ImagePath" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageData" class="control-label"></label>
-                <input asp-for="ImageData" class="form-control" />
-                <span asp-validation-for="ImageData" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@section Style {
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 }
+
+<div class="container my-5">
+    <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #6f4e37;">Edit Item</h2>
+
+    <form asp-action="Edit" asp-route-id="@Model.MenuItemId" enctype="multipart/form-data">
+        <input type="hidden" asp-for="MenuItemId" />
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control rounded-pill" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control rounded-4"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label">Price (€)</label>
+            <input asp-for="Price" class="form-control rounded-pill" />
+        </div>
+        <div class="mb-3">
+    <label asp-for="CategoryId" class="form-label">Category</label>
+    <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-select rounded-pill"></select>
+    <span asp-validation-for="CategoryId" class="text-danger"></span>
+</div>
+
+        <div class="mb-3">
+            <label asp-for="ImageFile" class="form-label">Upload New Image</label>
+            <input asp-for="ImageFile" type="file" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Current Image</label><br />
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <img src="@Model.ImagePath" alt="Image" style="width: 150px;" />
+            }
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary rounded-pill px-4">Update</button>
+        <a asp-action="Index" class="btn btn-secondary rounded-pill px-4">Cancel</a>
+    </form>
+</div>

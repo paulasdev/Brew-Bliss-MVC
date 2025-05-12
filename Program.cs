@@ -5,6 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<BrewBlissDbContext>(options => 
+
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConsultWithUsDbContext"))); 
 
 
 var app = builder.Build();
@@ -13,7 +16,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Index/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
     app.UseHsts();
 }
 
@@ -40,9 +43,9 @@ app.MapControllerRoute(
     name: "default3",
     pattern: "{controller=Menu}/{action=Menu}/{id?}");
 
-// API routes (for MenuController, ReviewsController)
+// API routes (for MenuController)
 app.MapControllers(); 
-
+app.UseStaticFiles();
 
 app.Run();
 

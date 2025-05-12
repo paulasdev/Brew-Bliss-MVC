@@ -49,69 +49,24 @@
           </div>
         </section>
 
-        <section class="products">
-          <div class="card">
-            <div class="badge">⚙ 50% off – €2.50</div>
-            <img src="/images/fem-coffee.jpg" alt="Black coffee in a white mug" />
-            <h3>Coffee Bliss<span>€5.00</span></h3>
-            <p>
-              The beans are hand-picked, carefully sorted, and only the finest
-              make it into our everyday single-source brew.
-            </p>
-          </div>
 
-          <div class="card">
-            <div class="badge">⚙ 50% off – €2.50</div>
-            <img
-              src="/images/fem-iced-coffee.jpg"
-              alt="Cold brewed iced coffee with half-and-half."
-            />
-            <h3>Iced Coffee<span>€5.00</span></h3>
-            <p>
-              Our iced coffee is cold-brewed overnight, then mixed to order with
-              half-and-half, sugar, and plenty of ice.
-            </p>
-          </div>
+<section class="products">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            @if (item.Price > 3.00M)
+            {
+                <div class="badge">⚙ 50% off – €@( (item.Price / 2).ToString("0.00") )</div>
+            }
+            <img src="@item.ImagePath" alt="@item.Name" />
+            <h3>@item.Name <span>€@item.Price.ToString("0.00")</span></h3>
+            <p>@item.Description</p>
+        </div>
+    }
+</section>
+         
 
-          <div class="card">
-            <img
-              src="/images/fem-latte.jpg"
-              alt="Latte with foamy milk and flavors."
-            />
-            <h3>Latte Charm <span>€3.50</span></h3>
-            <p>
-              Combining our amazing espresso with plenty of hot, foamy milk, our
-              lattes are the talk of the town. We offer a dozen different syrup
-              flavors, including vanilla, cinnamon, and caramel.
-            </p>
-          </div>
 
-          <div class="card">
-            <div class="badge">⚙ 50% off – €2.00</div>
-            <img
-              src="/images/fem-capuccino.jpg"
-              alt="Cappuccino with balanced milk and espresso."
-            />
-            <h3>Cappuccino<span>€4.00</span></h3>
-            <p>
-              Want an even balance of milk and espresso? Our cappuccino is for
-              you. Ask for a sprinkle of cocoa powder, vanilla powder, or
-              cinnamon on top.
-            </p>
-          </div>
-
-          <div class="card">
-            <img
-              src="/images/fem-coffee-mac.jpg"
-              alt="Macchiato with espresso and milk foam"
-            />
-            <h3>Macchiato Marvel<span>€3.50</span></h3>
-            <p>
-              A macchiato has only espresso and milk foam - even less milk than
-              the cappuccino or latte.
-            </p>
-          </div>
-        </section>
 
         <section class="menu-table container my-5">
           <h2 class="text-center mb-4">Our Coffee Prices</h2>

@@ -1,23 +1,25 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using BrewBlissApp.Models;
 
-namespace BrewBlissApp.Controllers;
-
-public class MenuController : Controller
+namespace BrewBlissApp.Controllers
 {
-    private readonly ILogger<MenuController> _logger;
-
-    public MenuController(ILogger<MenuController> logger)
+    public class MenuController : Controller
     {
-        _logger = logger;
+        private readonly ILogger<MenuController> _logger;
+        private readonly BrewBlissDbContext _context;
+
+        public MenuController(ILogger<MenuController> logger, BrewBlissDbContext context)
+        {
+            _logger = logger;
+            _context = context;
+        }
+
+        // GET: /Menu/Menu
+        public async Task<IActionResult> Menu()
+        {
+            var items = await _context.MenuItems.Include(m => m.Category).ToListAsync();
+            return View(items);
+        }
     }
-
-    public IActionResult Menu()
-    {
-        return View();
-    }
-
-
-
 }

@@ -29,17 +29,14 @@ namespace BrewBlissApp.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var menuItem = await _context.MenuItems
                 .Include(m => m.Category)
                 .FirstOrDefaultAsync(m => m.MenuItemId == id);
+
             if (menuItem == null)
-            {
                 return NotFound();
-            }
 
             return View(menuItem);
         }
@@ -47,24 +44,41 @@ namespace BrewBlissApp.Controllers
         // GET: MenuItem/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
             return View();
         }
 
         // POST: MenuItem/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MenuItemId,Name,Description,Price,ImagePath,CategoryId,ImageData")] MenuItem menuItem)
+        public async Task<IActionResult> Create(MenuItem menuItem)
         {
+            if (menuItem.ImageFile != null)
+            {
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(menuItem.ImageFile.FileName);
+                var filePath = Path.Combine(folderPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await menuItem.ImageFile.CopyToAsync(stream);
+                }
+
+                menuItem.ImagePath = "/images/" + fileName;
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(menuItem);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Item added successfully!";
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", menuItem.CategoryId);
+
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", menuItem.CategoryId);
             return View(menuItem);
         }
 
@@ -72,29 +86,39 @@ namespace BrewBlissApp.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var menuItem = await _context.MenuItems.FindAsync(id);
             if (menuItem == null)
-            {
                 return NotFound();
-            }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", menuItem.CategoryId);
+
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", menuItem.CategoryId);
             return View(menuItem);
         }
 
         // POST: MenuItem/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MenuItemId,Name,Description,Price,ImagePath,CategoryId,ImageData")] MenuItem menuItem)
+        public async Task<IActionResult> Edit(int id, MenuItem menuItem)
         {
             if (id != menuItem.MenuItemId)
-            {
                 return NotFound();
+
+            if (menuItem.ImageFile != null)
+            {
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(menuItem.ImageFile.FileName);
+                var filePath = Path.Combine(folderPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await menuItem.ImageFile.CopyToAsync(stream);
+                }
+
+                menuItem.ImagePath = "/images/" + fileName;
             }
 
             if (ModelState.IsValid)
@@ -103,20 +127,19 @@ namespace BrewBlissApp.Controllers
                 {
                     _context.Update(menuItem);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Item updated successfully!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!MenuItemExists(menuItem.MenuItemId))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", menuItem.CategoryId);
             return View(menuItem);
         }
@@ -125,17 +148,14 @@ namespace BrewBlissApp.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var menuItem = await _context.MenuItems
                 .Include(m => m.Category)
                 .FirstOrDefaultAsync(m => m.MenuItemId == id);
+
             if (menuItem == null)
-            {
                 return NotFound();
-            }
 
             return View(menuItem);
         }
@@ -149,9 +169,10 @@ namespace BrewBlissApp.Controllers
             if (menuItem != null)
             {
                 _context.MenuItems.Remove(menuItem);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Item deleted successfully!";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
