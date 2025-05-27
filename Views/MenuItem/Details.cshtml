@@ -1,4 +1,4 @@
-@model BrewBlissApp.Models.MenuItem
+
 
 @{
     ViewData["Title"] = "Item Details";
@@ -25,8 +25,8 @@
         <dt class="col-sm-2">Price</dt>
         <dd class="col-sm-10">€@Model.Price.ToString("0.00")</dd>
 
-       <dt class="col-sm-2">Category</dt>
-<dd class="col-sm-10">@Model.Category?.CategoryName</dd>
+        <dt class="col-sm-2">Category</dt>
+        <dd class="col-sm-10">@Model.Category?.CategoryName</dd>
 
         <dt class="col-sm-2">Image</dt>
         <dd class="col-sm-10">
@@ -37,6 +37,33 @@
         </dd>
     </dl>
 
-    <a asp-action="Edit" asp-route-id="@Model.MenuItemId" class="btn btn-outline-dark rounded-pill px-4">Edit</a>
-    <a asp-action="Index" class="btn btn-secondary rounded-pill px-4">Back to List</a>
+    @if (ViewBag.Ingredients != null || ViewBag.Calories != null || ViewBag.Vegan != null)
+{
+    <hr />
+    <h4>More Information</h4>
+    <dl class="row">
+        @if (ViewBag.Ingredients != null)
+        {
+            <dt class="col-sm-2">Ingredients</dt>
+            <dd class="col-sm-10">@ViewBag.Ingredients</dd>
+        }
+
+        @if (ViewBag.Calories != null)
+        {
+            <dt class="col-sm-2">Calories</dt>
+            <dd class="col-sm-10">@ViewBag.Calories</dd>
+        }
+
+        @if (ViewBag.Vegan != null)
+        {
+            <dt class="col-sm-2">Vegan</dt>
+            <dd class="col-sm-10">@(ViewBag.Vegan ? "Yes" : "No")</dd>
+        }
+    </dl>
+}
+
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.MenuItemId" class="btn btn-outline-dark rounded-pill px-4">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary rounded-pill px-4">Back to List</a>
+    </div>
 </div>

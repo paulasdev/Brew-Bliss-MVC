@@ -1,8 +1,17 @@
 @model BrewBlissApp.Models.Category
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Menu Items";
+      Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Style {
+    <link rel="stylesheet" href="/css/styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+}
+
 
 <h1>Details</h1>
 

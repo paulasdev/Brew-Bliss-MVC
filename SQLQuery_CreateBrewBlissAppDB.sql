@@ -1,0 +1,29 @@
+CREATE DATABASE BrewBlissDB;
+GO
+
+USE BrewBlissDB;
+GO
+
+CREATE TABLE AdminUsers (
+    Id INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    Username NVARCHAR(100) NOT NULL,
+    Password NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Category (
+    CategoryID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    CategoryName NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE MenuItem (
+    MenuItemID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Description NVARCHAR(255),
+    Price DECIMAL(10, 2) NOT NULL,
+    ImagePath NVARCHAR(255),
+    CategoryID INT,
+    ImageData VARBINARY(MAX),
+    CONSTRAINT FK_MenuItem_Category FOREIGN KEY (CategoryID)
+        REFERENCES Category (CategoryID)
+        ON DELETE SET NULL ON UPDATE CASCADE
+);

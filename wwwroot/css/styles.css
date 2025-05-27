@@ -516,6 +516,105 @@ aside {
   border-left: 4px solid #e07a5f;
 }
 
+/*Menu item section */
+.table-custom thead {
+  background-color: #43281c;
+  color: #f1e3d3;
+}
+
+.table-custom tbody tr:hover {
+  background-color: #f1e3d3;
+  color: #43281c;
+}
+
+.btn-create {
+  background-color: #43281c;
+  color: #f1e3d3;
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid #43281c;
+  transition: 0.3s ease;
+}
+
+.btn-create:hover {
+  background-color: #f1e3d3;
+  color: #43281c;
+  border-color: #43281c;
+}
+
+.input-group .form-control {
+  border-radius: 20px 0 0 20px;
+}
+
+.input-group .btn {
+  border-radius: 0 20px 20px 0;
+}
+
+.btn-outline-primary {
+  border-color: #43281c;
+  color: #43281c;
+}
+
+.btn-outline-primary:hover {
+  background-color: #43281c;
+  color: #f1e3d3;
+}
+
+.btn-outline-info {
+  border-color: #ddb892;
+  color: #ddb892;
+}
+
+.btn-outline-info:hover {
+  background-color: #ddb892;
+  color: #43281c;
+}
+
+.btn-outline-danger {
+  border-color: #e84a5f;
+  color: #e84a5f;
+}
+
+.btn-outline-danger:hover {
+  background-color: #e84a5f;
+  color: #fff;
+}
+
+/* Admin Dashboard section */
+.dashboard-wrapper {
+  background-color: #fdf6f0;
+  min-height: 100vh;
+}
+
+.dashboard-title {
+  font-weight: 700;
+  color: #43281c;
+  font-family: "Montserrat", sans-serif;
+}
+
+.dashboard-card {
+  background-color: #f1e3d3;
+  border-radius: 20px;
+  color: #43281c;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+}
+
+.dashboard-card h4 {
+  font-weight: 600;
+}
+
+.dashboard-card p {
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
 /* About section */
 .about-hero {
   padding: 3rem 2rem;

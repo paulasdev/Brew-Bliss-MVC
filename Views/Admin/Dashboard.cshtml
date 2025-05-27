@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link rel="stylesheet" href="/css/styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+}
+
+<div class="dashboard-wrapper py-5">
+    <div class="container text-center">
+        <h2 class="dashboard-title mb-5">Welcome, @User.Identity?.Name!</h2>
+
+        <div class="row justify-content-center g-4 mb-4">
+            <div class="col-md-5">
+                <div class="dashboard-card shadow-sm p-4">
+                    <h4 class="mb-3">Menu Items</h4>
+                    <p>View, create, edit or delete the menu items</p>
+                    <a href="/MenuItem" class="btn btn-create w-100">Manage Menu Items</a>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="dashboard-card shadow-sm p-4">
+                    <h4 class="mb-3">Categories</h4>
+                    <p>View, create, edit or delete the categories.</p>
+                    <a href="/Category" class="btn btn-create w-100">Manage Categories</a>
+                </div>
+            </div>
+        </div>
+
+   
+        <div class="mt-4">
+            <a href="/Admin/Logout" class="btn btn-review px-5">Logout</a>
+        </div>
+    </div>
+</div>

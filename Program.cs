@@ -1,22 +1,35 @@
 using BrewBlissApp.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<BrewBlissDbContext>(options => 
 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConsultWithUsDbContext"))); 
+// Register DbContext with connection string
+builder.Services.AddDbContext<BrewBlissDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BrewBlissDbContext")));
 
+// Enable session services
+builder.Services.AddSession();
+
+// Cookie authentication configuration
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/Admin/Index"; 
+    });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Exception and status code handling (for production)
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Index/Error");
-
+    app.UseExceptionHandler("/Error");
+    app.UseStatusCodePagesWithReExecute("/Error/{0}");
     app.UseHsts();
 }
 
@@ -25,28 +38,17 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Add middleware for sessions and authentication
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
+// Set up default MVC route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "default1",
-    pattern: "{controller=Contact}/{action=Contact}/{id?}");
-
-app.MapControllerRoute(
-    name: "default2",
-    pattern: "{controller=About}/{action=About}/{id?}");    
-
-app.MapControllerRoute(
-    name: "default3",
-    pattern: "{controller=Menu}/{action=Menu}/{id?}");
-
-// API routes (for MenuController)
-app.MapControllers(); 
-app.UseStaticFiles();
+// Optional: map API controllers
+app.MapControllers();
 
 app.Run();
-
-
